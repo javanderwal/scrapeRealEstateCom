@@ -37,3 +37,33 @@
 #'   email_password = "YOUR_GMAIL_APP_PASSWORD"
 #' )
 #' }
+
+email_listings_spreadsheet <-
+  function(url_to_scrape,
+           scrapfly_api_key,
+           email_from,
+           email_to,
+           email_host,
+           email_port,
+           email_username,
+           email_password) {
+    spreadsheet_path <- create_listing_spreadsheet(url_to_scrape, scrapfly_api_key)
+
+    email <-
+      emayili::envelope() |>
+      emayili::from(email_from) |>
+      emayili::to(email_to) |>
+      emayili::subject(stringr::str_glue("Current realestate.com listings - {format(Sys.Date(), '%d-%b-%Y')}")) |>
+      emayili::text("Please find attached realestate.com's current listings.") |>
+      emayili::attachment(spreadsheet_path)
+
+    smtp <-
+      emayili::server(
+        host = email_host,
+        port = email_port,
+        username = email_username,
+        password = email_password
+      )
+
+    smtp(email)
+  }
