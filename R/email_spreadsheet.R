@@ -1,0 +1,47 @@
+#' Email a Spreadsheet Containing realestate.com listings data
+#'
+#' @description
+#' This function automates the process of scraping a web page, compiling the
+#' data into a spreadsheet, and emailing that spreadsheet as an attachment. It
+#' serves as a high-level wrapper, combining scraping and notification steps.
+#'
+#' @details
+#' The function first calls an internal helper, `Notesing_spreadsheet()`,
+#' to perform the web scraping via the Scrapfly API and generate the spreadsheet.
+#' It then uses the `emayili` package to construct and send an email with the
+#' spreadsheet attached. The email subject is dynamically set to the name of the
+#' generated file.
+#'
+#' @param url_to_scrape A string containing the full URL of the web page to scrape.
+#' @param scrapfly_api_key A string containing your API key for the Scrapfly service.
+#' @param email_from A string specifying the sender's email address (e.g., `"sender@example.com"`).
+#' @param email_to A string specifying the recipient's email address (e.g., `"recipient@example.com"`).
+#' @param email_host A string for the SMTP server's hostname (e.g., `"smtp.gmail.com"`).
+#' @param email_port A numeric value for the SMTP server's port (e.g., `587`).
+#' @param email_username A string for the username to authenticate with the SMTP server.
+#' @param email_password A string for the password or app-specific token to authenticate with the SMTP server.
+#'
+#' @return Returns the SMTP server's response object from the `emayili` package,
+#'   which can be used to confirm successful delivery or debug issues.
+#'
+#' @importFrom emayili envelope from to subject text attachment server
+#' @importFrom tools file_path_sans_ext
+#'
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' # This example requires a valid Scrapfly API key and SMTP credentials.
+#' # The `Notesing_spreadsheet` function must also be defined.
+#'
+#' email_listings_spreadsheet(
+#'   url_to_scrape = "https://www.example-news.com/articles",
+#'   scrapfly_api_key = "YOUR_SCRAPFLY_API_KEY",
+#'   email_from = "your_email@gmail.com",
+#'   email_to = "colleague@work.com",
+#'   email_host = "smtp.gmail.com",
+#'   email_port = 587,
+#'   email_username = "your_email@gmail.com",
+#'   email_password = "YOUR_GMAIL_APP_PASSWORD"
+#' )
+#' }
