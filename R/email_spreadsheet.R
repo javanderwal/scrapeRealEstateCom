@@ -1,16 +1,9 @@
 #' Email a Spreadsheet Containing realestate.com listings data
 #'
 #' @description
-#' This function automates the process of scraping a web page, compiling the
-#' data into a spreadsheet, and emailing that spreadsheet as an attachment. It
-#' serves as a high-level wrapper, combining scraping and notification steps.
-#'
-#' @details
-#' The function first calls an internal helper, `Notesing_spreadsheet()`,
-#' to perform the web scraping via the Scrapfly API and generate the spreadsheet.
-#' It then uses the `emayili` package to construct and send an email with the
-#' spreadsheet attached. The email subject is dynamically set to the name of the
-#' generated file.
+#' Scrape a realestate.com webpage and email a spreadsheet with the contents
+#' to a specified email address.
+#' the contents of a supplied
 #'
 #' @param url_to_scrape A string containing the full URL of the web page to scrape.
 #' @param scrapfly_api_key A string containing your API key for the Scrapfly service.
@@ -32,7 +25,6 @@
 #' @examples
 #' \dontrun{
 #' # This example requires a valid Scrapfly API key and SMTP credentials.
-#' # The `Notesing_spreadsheet` function must also be defined.
 #'
 #' email_listings_spreadsheet(
 #'   url_to_scrape = "https://www.example-news.com/articles",
