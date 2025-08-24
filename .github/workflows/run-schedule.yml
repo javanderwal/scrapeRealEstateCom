@@ -28,4 +28,4 @@ jobs:
 
       # Step 4: Run the container and see the output
       - name: Run container
-        run: docker run --rm -e SMTP_USER="${{ secrets.SMTP_USER }}" -e SMTP_PASSWORD="${{ secrets.SMTP_PASSWORD }}" -e EMAIL_TO="${{ secrets.EMAIL_TO }}" -e SCRAPFLY_API_KEY="${{ secrets.SCRAPFLY_API_KEY }}" ghcr.io/javanderwal/scraperealestatecom:latest
+        run: docker run --rm -e URL_FILTER="${{ secrets.URL_FILTER }}" -e SMTP_USER="${{ secrets.SMTP_USER }}" -e SMTP_PASSWORD="${{ secrets.SMTP_PASSWORD }}" -e EMAIL_TO="${{ secrets.EMAIL_TO }}" -e SCRAPFLY_API_KEY="${{ secrets.SCRAPFLY_API_KEY }}" ghcr.io/javanderwal/scraperealestatecom:latest
