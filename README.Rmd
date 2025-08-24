@@ -29,7 +29,7 @@ docker pull ghcr.io/javanderwal/scraperealestatecom:latest
 
 ``` bash
 `docker run --rm \
-  -e URL_FILTER="${{ secrets.URL_FILTER }}" \
+  -e URL_FILTER="${URL_FILTER}" \
   -e SMTP_USER="${SMTP_USER}" \ 
   -e SMTP_PASSWORD="${SMTP_PASSWORD}" \ 
   -e EMAIL_TO="${EMAIL_TO}" \ 
@@ -41,12 +41,25 @@ docker pull ghcr.io/javanderwal/scraperealestatecom:latest
 
 ## Configuration
 
-**Email settings** are passed in as environment variables (*URL_FILTER*, *SMTP_USER*, *SMTP_PASSWORD*, *EMAIL_TO*, *SCRAPFLY_API_KEY*.).
+**Email settings** are passed in as the following environment variables:
 
-**Property search parameters** (suburbs, price range, bedrooms, etc.) are set in the R package configuration.
+-   SMTP_USER
+
+-   SMTP_PASSWORD
+
+-   EMAIL_TO
+
+**Property search parameters** is passed in as the following environment variable:
+
+-   URL_FILTER
+
+**The scrapfly API Key** is passed in as the following environment variable:
+
+-   SCRAPFLY_API_KEY
 
 ## Automation
 
 You can schedule the scraper to run automatically using:
 
-GitHub Actions (cloud-based scheduled runs) Cron jobs (local or server scheduling)
+-   GitHub Actions (cloud-based scheduled runs)
+-   Cron jobs (local or server scheduling)
