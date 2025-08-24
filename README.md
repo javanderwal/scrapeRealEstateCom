@@ -1,0 +1,60 @@
+Real Estate Scraper
+================
+
+# Real Estate Scraper
+
+This R package automates the process of scraping property listings from
+[realestate.com.au](https://www.realestate.com.au/) for specific suburbs
+and property types. The results are compiled into a clean dataset,
+exported to **Excel**, and automatically sent via email.
+
+The project is containerized with **Docker**, allowing the entire
+workflow to run in a reproducible environment without requiring local
+setup of R or its dependencies.
+
+## Features
+
+- 🔍 Scrapes property listings from realestate.com.au  
+- 📊 Compiles results into a clean dataset  
+- 📂 Exports property data as an Excel (`.xlsx`) file  
+- 📧 Sends automated email with the Excel attachment  
+- 🐳 Runs inside a Docker image for portability and easy scheduling
+  (e.g. via GitHub Actions or cron jobs)
+
+## Usage
+
+1.  **Pull the Docker image**:
+
+``` bash
+docker pull ghcr.io/javanderwal/scraperealestatecom:latest
+```
+
+2.  **Run the container**:
+
+``` bash
+`docker run --rm \
+  -e URL_FILTER="${{ secrets.URL_FILTER }}" \
+  -e SMTP_USER="${SMTP_USER}" \ 
+  -e SMTP_PASSWORD="${SMTP_PASSWORD}" \ 
+  -e EMAIL_TO="${EMAIL_TO}" \ 
+  -e SCRAPFLY_API_KEY="${SCRAPFLY_API_KEY}" \ 
+  ghcr.io/javanderwal/scraperealestatecom:latest`
+```
+
+3.  **The script will scrape listings, create an Excel report, and email
+    it to the configured recipients.**
+
+## Configuration
+
+**Email settings** are passed in as environment variables (*URL_FILTER*,
+*SMTP_USER*, *SMTP_PASSWORD*, *EMAIL_TO*, *SCRAPFLY_API_KEY*.).
+
+**Property search parameters** (suburbs, price range, bedrooms, etc.)
+are set in the R package configuration.
+
+## Automation
+
+You can schedule the scraper to run automatically using:
+
+GitHub Actions (cloud-based scheduled runs) Cron jobs (local or server
+scheduling)
